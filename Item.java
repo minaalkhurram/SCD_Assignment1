@@ -5,14 +5,16 @@ public class Item {
    private static int id=0;
    private int cost;
 
-   Item(String t)
+   Item(String t,int popCount,int c)
    {
     id++;
     title=t;
-
+    popularityCount=popCount;
+    cost=c;
    }
    public void display()
    {
+    System.out.print("\n ID : "+id+" Title : "+title);
 
    }
    public void calculateCost()
