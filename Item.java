@@ -19,6 +19,12 @@ public class Item implements configuration {
     System.out.print("\n ID : "+myID+" Title : "+title);
 
    }
+   public void setTitle(String x)
+   {
+      title=x;
+      
+     }
+
    public void calculateCost()
    {
 

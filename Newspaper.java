@@ -18,6 +18,10 @@ public void display()
     super.display();
     System.out.println(" by "+publisher+" ("+date+")");
 }
+public void setpublisher(String x)
+{
+  publisher=x;
+}
 public void calculateCost()
 {
 

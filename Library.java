@@ -64,35 +64,41 @@ public void displayMenu()
     if(choice==1)
     {
        additem();
+       choice=0;
     }
     else if(choice==2)
     {
+        editItem();
+         choice=0;
 
     }
     else if(choice==3)
     {
       deleteitem();
+       choice=0;
     }
     else if(choice==4)
     {
        viewAll();
+        choice=0;
     }
     else if(choice==5)
     {
        viewById();
+        choice=0;
     }
     
 }
-  myobj.close();
+
 }
 
 public void additem()
 {
     Scanner myobj=new Scanner(System.in);
     System.out.print("1. Book\n2.Magazine\n3.Newspaper\nEnter Choice : ");
-    int choice=myobj.nextInt();
+    int choice1=myobj.nextInt();
     
-    if(choice==1)
+    if(choice1==1)
     {
          Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter book title : ");
@@ -107,9 +113,9 @@ public void additem()
         int c=myobj.nextInt();
         Item nn=new book(title,author,year,popc,c);
         ItemList.add(nn);
-        myobj1.close();
+      
     }
-    else if(choice==2)
+    else if(choice1==2)
     {
         Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter title : ");
@@ -134,11 +140,11 @@ public void additem()
 
         Item nn=new Magazine(title,author,lists,popc,c);
         ItemList.add(nn);
-        myobj1.close();
+     
 
 
     }
-    else if(choice==3)
+    else if(choice1==3)
     {
          Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter title : ");
@@ -153,10 +159,10 @@ public void additem()
         int c=myobj.nextInt();
         Item nn=new Newspaper(title,author,popc,year,c);
         ItemList.add(nn);
-        myobj1.close();
+   
 
     }
-    myobj.close();
+
 
 }
 
@@ -165,20 +171,36 @@ public void editItem()
      Scanner myobj=new Scanner(System.in);
     System.out.println("To delete item enter ID : ");
     int id=myobj.nextInt();
-    boolean check=false;
+    boolean check1=false;
       for(int i=0;i<ItemList.size();i++)
      {
         if(ItemList.get(i).getID()==id)
         {
-            ItemList.get(i).display();
+           System.out.println("Item information  : ");
+           ItemList.get(i).display();
+            System.out.println("Press 1. to edit title\n 2. edit author / publisher \n : ");
+           int id2=myobj.nextInt();
+    if(id2==1)
+    {
+          Scanner myobj1=new Scanner(System.in);
+          String nn=myobj1.nextLine();
+          ItemList.get(i).setTitle(nn);
+            System.out.println("UPDATED ");
+
+    }
+    else if(id2==2)
+    {
+       
+    }
+
+
 
         }
      }
-         if(check==false)
+         if(check1==false)
      {
         System.out.println("ITEM NOT FOUND ID:"+id);
      }
-myobj.close();
 }
 
 public void deleteitem()
@@ -229,5 +251,19 @@ public void viewById()
         System.out.println("ITEM NOT FOUND ID:"+id);
      }
      myobj.close();
+}
+
+public void viewByitem(Item item)
+{
+    item.display();
+ 
+ /*   for(int i=0;i<ItemList.size();i++)
+    {
+        if(item==ItemList.get(i))
+        {
+            ItemList.get(i).display();
+        }
+    }*/
+    
 }
 }

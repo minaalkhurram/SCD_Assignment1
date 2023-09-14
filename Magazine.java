@@ -26,6 +26,10 @@ public void display()
     }
     System.out.print("\n");
 }
+public void setpublisher(String x)
+{
+  publisher=x;
+}
 public void calculateCost()
 {
 
