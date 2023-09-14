@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Magazine extends Item {
 
-    private String publisher;
+    protected String publisher;
     private ArrayList<String> authorslist=new ArrayList<>();
 
 public Magazine(String t, String p,ArrayList<String> lists,int popCount,int c)
