@@ -22,9 +22,11 @@ public void setpublisher(String x)
 {
   publisher=x;
 }
-public void calculateCost()
+@Override
+public int calculateCost()
 {
-
+    cost=10;
+ return cost+5;
 }
     
 }

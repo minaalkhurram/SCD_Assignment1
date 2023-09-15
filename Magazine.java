@@ -30,8 +30,12 @@ public void setpublisher(String x)
 {
   publisher=x;
 }
-public void calculateCost()
+
+@Override
+public int calculateCost()
 {
+
+  return cost*popularityCount;
 
 }
 

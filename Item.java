@@ -4,7 +4,7 @@ public class Item implements configuration {
    public int popularityCount;
    private static int id=1;
    private int myID;
-   private int cost;
+   protected int cost;
 
    Item(String t,int popCount,int c)
    {
@@ -26,10 +26,9 @@ public class Item implements configuration {
       
      }
 
-   public void calculateCost()
+   public int calculateCost()
    {
-   
-
+     return cost;  
    }
    public int getID()
    {

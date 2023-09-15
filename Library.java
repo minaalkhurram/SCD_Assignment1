@@ -162,8 +162,6 @@ public void additem(){
 
         Item nn=new Magazine(title,author,lists,popc,c);
         ItemList.add(nn);
-     
-
 
     }
     else if(choice1==3)
