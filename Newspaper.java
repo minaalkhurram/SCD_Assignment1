@@ -18,9 +18,15 @@ public void display()
     super.display();
     System.out.println(" by "+publisher+" ("+date+")");
 }
-public void calculateCost()
+public void setpublisher(String x)
 {
-
+  publisher=x;
+}
+@Override
+public int calculateCost()
+{
+    cost=10;
+ return cost+5;
 }
     
 }

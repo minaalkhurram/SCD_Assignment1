@@ -1,10 +1,10 @@
 public class Item implements configuration {
    private String title;
    private boolean isBorrowed;
-   private int popularityCount;
+   public int popularityCount;
    private static int id=1;
    private int myID;
-   private int cost;
+   protected int cost;
 
    Item(String t,int popCount,int c)
    {
@@ -13,18 +13,33 @@ public class Item implements configuration {
     title=t;
     popularityCount=popCount;
     cost=c;
+    isBorrowed=false;
    }
    public void display()
    {
     System.out.print("\n ID : "+myID+" Title : "+title);
 
    }
-   public void calculateCost()
+   public void setTitle(String x)
    {
+      title=x;
+      
+     }
 
+   public int calculateCost()
+   {
+     return cost;  
    }
    public int getID()
    {
     return myID;
+   }
+   public boolean getBorrow()
+   {
+      return isBorrowed;
+   }
+   public void setBorrow(boolean val)
+   {
+      isBorrowed=val;
    }
 }

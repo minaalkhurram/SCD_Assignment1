@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Magazine extends Item {
 
-    private String publisher;
+    protected String publisher;
     private ArrayList<String> authorslist=new ArrayList<>();
 
 public Magazine(String t, String p,ArrayList<String> lists,int popCount,int c)
@@ -26,8 +26,16 @@ public void display()
     }
     System.out.print("\n");
 }
-public void calculateCost()
+public void setpublisher(String x)
 {
+  publisher=x;
+}
+
+@Override
+public int calculateCost()
+{
+
+  return cost*popularityCount;
 
 }
 

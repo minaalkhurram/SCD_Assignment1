@@ -1,16 +1,21 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Library {
    private ArrayList<Item> ItemList=new ArrayList<>();
+   private ArrayList<Borrower> borrowers=new ArrayList<>();
    
-   public Library(){
+public Library(){
     //file reading is done in the constructor 
-  try {
+    loadFromFile();}
+
+public void loadFromFile(){
+      try {
     File myObj = new File("libinput.txt");
     Scanner myReader = new Scanner(myObj);
 
@@ -50,49 +55,79 @@ public class Library {
   } catch (FileNotFoundException e) {
     System.out.println("An error occurred.");
     e.printStackTrace();
-  }
-}
+  }}
 
-public void displayMenu()
-{ 
+public void displayMenu(){ 
     Scanner myobj=new Scanner(System.in);
-   int choice=0;
-    while(choice!=6){
-         System.out.println("\n\n1. Add Items\n2. Edit Items\n3. Delete Item");
-    System.out.println("4. View All Items\n5. View Item by ID\n6. Exit\n Enter Choice: ");
+   int choice=-1;
+    while(choice!=0){
+   System.out.println("\n LIBRARY MANAGEMNT SYSTEM MENU :\n1. Hot picks ! \n2. Borrow an item\n3. Add Item");
+    System.out.println("4. Edit Item\n5. Delete item \n6. View all items\n7. View item by id \n8. view borrowers list\n9. return item \n 0. Exit \n Enter Choice: ");
      choice=myobj.nextInt();
     if(choice==1)
     {
-       additem();
+       hotpics();
+    
     }
     else if(choice==2)
     {
+         if(borrowItem()==true)
+         {
+            System.out.println("ITEM BORROWED \n\n");
+         }
+         else
+          System.out.println("ITEM NOT BORROWED \n\n");
+   
 
     }
     else if(choice==3)
     {
-      deleteitem();
+      additem();
+      
     }
     else if(choice==4)
     {
-       viewAll();
+        editItem();
+      //  choice=0;
     }
     else if(choice==5)
     {
-       viewById();
+       deleteitem();
+      //  choice=0;
     }
-    
-}
-  myobj.close();
-}
+    else if(choice==6)
+    {
+        viewAll();
+       // choice=0;
+    }
+    else if(choice==7)
+    {
+        viewById();
+       // choice=0;
+    }
+    else if(choice==8)
+    {
+        viewBorrowers();
+       // choice=0;
+    }
+    else if(choice==9)
+    {
+        returnBorrow();
+       // choice=0;
+    }
+    else if(choice>9||choice<0)
+    {
+        System.out.println("INVALID RENTER");
+        choice=0;
+    }
+    }}
 
-public void additem()
-{
+public void additem(){
     Scanner myobj=new Scanner(System.in);
     System.out.print("1. Book\n2.Magazine\n3.Newspaper\nEnter Choice : ");
-    int choice=myobj.nextInt();
+    int choice1=myobj.nextInt();
     
-    if(choice==1)
+    if(choice1==1)
     {
          Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter book title : ");
@@ -107,9 +142,9 @@ public void additem()
         int c=myobj.nextInt();
         Item nn=new book(title,author,year,popc,c);
         ItemList.add(nn);
-        myobj1.close();
+      
     }
-    else if(choice==2)
+    else if(choice1==2)
     {
         Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter title : ");
@@ -134,11 +169,9 @@ public void additem()
 
         Item nn=new Magazine(title,author,lists,popc,c);
         ItemList.add(nn);
-        myobj1.close();
-
 
     }
-    else if(choice==3)
+    else if(choice1==3)
     {
          Scanner myobj1=new Scanner(System.in);
         System.out.print("\n Enter title : ");
@@ -153,36 +186,45 @@ public void additem()
         int c=myobj.nextInt();
         Item nn=new Newspaper(title,author,popc,year,c);
         ItemList.add(nn);
-        myobj1.close();
+   
 
-    }
-    myobj.close();
+    }}
 
-}
-
-public void editItem()
-{
+public void editItem(){
      Scanner myobj=new Scanner(System.in);
     System.out.println("To delete item enter ID : ");
     int id=myobj.nextInt();
-    boolean check=false;
+    boolean check1=false;
       for(int i=0;i<ItemList.size();i++)
      {
         if(ItemList.get(i).getID()==id)
         {
-            ItemList.get(i).display();
+           System.out.println("Item information  : ");
+           ItemList.get(i).display();
+            System.out.println("Press 1. to edit title\n 2. edit author / publisher \n : ");
+           int id2=myobj.nextInt();
+    if(id2==1)
+    {
+          Scanner myobj1=new Scanner(System.in);
+          String nn=myobj1.nextLine();
+          ItemList.get(i).setTitle(nn);
+            System.out.println("UPDATED ");
+
+    }
+    else if(id2==2)
+    {
+       
+    }
+
 
         }
      }
-         if(check==false)
+         if(check1==false)
      {
         System.out.println("ITEM NOT FOUND ID:"+id);
-     }
-myobj.close();
-}
+     }}
 
-public void deleteitem()
-{
+public void deleteitem(){
     Scanner myobj=new Scanner(System.in);
     System.out.println("To delete item enter ID : ");
     int id=myobj.nextInt();
@@ -191,16 +233,22 @@ public void deleteitem()
      {
         if(ItemList.get(i).getID()==id)
         {
+            if(ItemList.get(i).getBorrow()==false){
             ItemList.remove(i);
+            System.out.println("ITEM DELETED ")
             check=true;
+            }
+            else
+            {
+                System.out.println("ITEM is currently borrowed \n Return itme to delete ");
+            }
         }
      }
          if(check==false)
      {
         System.out.println("ITEM NOT FOUND ID:"+id);
      }
-     myobj.close();
-}
+    }
 
 public void viewAll()
 {
@@ -209,7 +257,6 @@ public void viewAll()
         ItemList.get(i).display();
     }
 }
-
 public void viewById()
 {
     Scanner myobj=new Scanner(System.in);
@@ -228,6 +275,102 @@ public void viewById()
      {
         System.out.println("ITEM NOT FOUND ID:"+id);
      }
-     myobj.close();
+    
 }
+public void viewByitem(Item item){
+    item.display();}
+
+public boolean borrowItem(){
+    Scanner myobj=new Scanner(System.in);
+    System.out.print("\nEnter ID to borrow Item : ");
+    int id=myobj.nextInt();
+     boolean check=false;
+     for(int i=0;i<ItemList.size();i++)
+     {
+        if(ItemList.get(i).getID()==id)
+        {
+            System.out.println("\n COST OF BORROWING : "+ ItemList.get(i).calculateCost()+"\n");
+            if(ItemList.get(i).getBorrow()==false)
+            {
+                   Scanner myobj1=new Scanner(System.in);
+                   System.out.print("\nEnter Your name to borrow : ");
+                   String borrow=myobj1.nextLine();
+                   for(int j=0;j<borrowers.size();j++ )
+                   {
+                        
+                             
+                    if(borrowers.get(j).getname().equalsIgnoreCase(borrow))
+                    {
+                        
+                        System.out.println(" \nYou are an existing borrower");
+                        if(borrowers.get(j).checkExsiting(id)==true){
+                        borrowers.get(j).addBorrowed(ItemList.get(i));
+                        ItemList.get(i).setBorrow(true);
+                        ItemList.get(i).popularityCount++;
+                        return true;
+                        }
+                        return false;
+                    }
+
+                   }
+                   if(check==false){
+                   Borrower nn=new Borrower(borrow);
+                   nn.addBorrowed(ItemList.get(i));
+                   borrowers.add(nn);
+                   ItemList.get(i).setBorrow(true);
+                   ItemList.get(i).popularityCount++;
+                   return true;
+                   }
+
+            }
+            else
+            {
+                System.out.println("\nITEM ALREADY BORROWED");
+            }
+        }
+     }
+
+  return false;}
+
+
+public void viewBorrowers(){
+    for(int i=0;i<borrowers.size();i++)
+    {
+        borrowers.get(i).view();
+    }}
+
+public void returnBorrow(){
+     Scanner myobj=new Scanner(System.in);
+    System.out.print("\nEnter ID to return borrowed Item : ");
+    int id=myobj.nextInt();
+
+    for(int i=0;i<ItemList.size();i++)
+    {
+       if(ItemList.get(i).getID()==id)
+       {
+        ItemList.get(i).setBorrow(false);
+        System.out.print("\nReturned Succesfully : ");
+       }  }}
+
+
+
+public void hotpics(){
+    int n = ItemList.size();
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (ItemList.get(j).popularityCount < ItemList.get(j + 1).popularityCount) {
+                    // Swap elements if they are out of order
+                    Item temp = ItemList.get(j);
+                    ItemList.set(j, ItemList.get(j + 1));
+                    ItemList.set(j + 1, temp);
+                }
+            }
+        }
+
+     viewAll();
+    }
+
+
+
 }
