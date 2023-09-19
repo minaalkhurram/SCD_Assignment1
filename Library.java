@@ -348,8 +348,17 @@ public void returnBorrow(){
     {
        if(ItemList.get(i).getID()==id)
        {
-        ItemList.get(i).setBorrow(false);
-        System.out.print("\nReturned Succesfully : ");
+             Scanner myobj1=new Scanner(System.in);
+          System.out.print("\nEnter name to return borrowed Item : ");
+           String nn=myobj1.nextLine();
+          for(int j=0;j<borrowers.size();j++){
+     if(borrowers.get(i).name==nn){
+         borrowers.get(i).removeBorrow(id);
+         ItemList.get(i).setBorrow(false);
+         System.out.print("\nReturned Succesfully : ");
+            }
+          }
+
        }  }}
 
 
