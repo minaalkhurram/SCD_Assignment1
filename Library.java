@@ -1,10 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Library {
    private ArrayList<Item> ItemList=new ArrayList<>();
