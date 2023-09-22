@@ -192,7 +192,7 @@ public void additem(){
 
 public void editItem(){
      Scanner myobj=new Scanner(System.in);
-    System.out.println("To delete item enter ID : ");
+    System.out.println("To edit item enter ID : ");
     int id=myobj.nextInt();
     boolean check1=false;
       for(int i=0;i<ItemList.size();i++)
@@ -201,21 +201,11 @@ public void editItem(){
         {
            System.out.println("Item information  : ");
            ItemList.get(i).display();
-            System.out.println("Press 1. to edit title\n 2. edit author / publisher \n : ");
-           int id2=myobj.nextInt();
-    if(id2==1)
-    {
           Scanner myobj1=new Scanner(System.in);
           String nn=myobj1.nextLine();
           ItemList.get(i).setTitle(nn);
             System.out.println("UPDATED ");
-
-    }
-    else if(id2==2)
-    {
-       
-    }
-
+           check1=true;
 
         }
      }
@@ -368,7 +358,7 @@ public void returnBorrow(){
 
 public void hotpics(){
     int n = ItemList.size();
-
+        System.out.println("\nHOT PICS");
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (ItemList.get(j).popularityCount < ItemList.get(j + 1).popularityCount) {
