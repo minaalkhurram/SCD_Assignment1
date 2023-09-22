@@ -45,6 +45,7 @@ public class Borrower {
         {
             if(currentBorrowed.get(i).getID()==id)
             {
+                System.out.println("hello");
                 currentBorrowed.remove(i);
             }
         }
