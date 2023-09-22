@@ -235,7 +235,7 @@ public void deleteitem(){
         {
             if(ItemList.get(i).getBorrow()==false){
             ItemList.remove(i);
-            System.out.println("ITEM DELETED ")
+            System.out.println("ITEM DELETED ");
             check=true;
             }
             else
@@ -348,12 +348,15 @@ public void returnBorrow(){
     {
        if(ItemList.get(i).getID()==id)
        {
-             Scanner myobj1=new Scanner(System.in);
-          System.out.print("\nEnter name to return borrowed Item : ");
-           String nn=myobj1.nextLine();
-          for(int j=0;j<borrowers.size();j++){
-     if(borrowers.get(i).name==nn){
-         borrowers.get(i).removeBorrow(id);
+         Scanner myobj1=new Scanner(System.in);
+         System.out.print("\nEnter name to return borrowed Item : ");
+         String nn=myobj1.nextLine();
+          
+    for(int j=0;j<borrowers.size();j++){
+          
+        if(borrowers.get(j).getname().equalsIgnoreCase(nn))
+        {
+         borrowers.get(j).removeBorrow(id);
          ItemList.get(i).setBorrow(false);
          System.out.print("\nReturned Succesfully : ");
             }
